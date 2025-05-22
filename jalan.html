@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jalan Provinsi Sulsel</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background-color: #f9f9f9; }
+    .sticky-wrapper { position: sticky; top: 0; z-index: 1000; }
+    header {
+      background-color: #0d47a1;
+      color: white;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo {
+      height: 32px;
+    }
+    .map-card {
+      background-color: white; border-radius: 0 0 20px 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15); padding: 10px;
+    }
+    .map-title { font-size: 16px; font-weight: bold; margin-bottom: 10px; color: #333; }
+    #map { height: 300px; border-radius: 12px; }
+    .container { padding: 10px; }
+    .card-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;
+    }
+    .card {
+      background-color: white; border-radius: 20px; padding: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15); text-align: center; font-size: 14px;
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      cursor: pointer; transition: background-color 0.2s;
+    }
+    .card:hover { background-color: #e3f2fd; }
+    .card.active { background-color: #c5e1f9; }
+    .card i { font-size: 24px; color: #0d47a1; }
+    .card span { font-size: 12px; color: #666; }
+
+    .dropdown {
+      position: relative;
+    }
+    .dropbtn {
+      background-color: white;
+      color: #0d47a1;
+      font-weight: bold;
+      border: none;
+      border-radius: 15px;
+      padding: 6px 12px;
+      cursor: pointer;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: white;
+      min-width: 180px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      border-radius: 10px;
+      z-index: 1001;
+    }
+    .dropdown-content a {
+      padding: 10px 16px;
+      display: block;
+      color: #0d47a1;
+      text-decoration: none;
+      font-size: 13px;
+    }
+    .dropdown-content a:hover {
+      background-color: #e3f2fd;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    footer {
+      background-color: #0d47a1;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="sticky-wrapper">
+  <header>
+    <div class="header-left">
+      <img src="images/logo_sulsel.png" alt="Logo Sulsel" class="logo">
+      <i class="fas fa-road"></i><span>Data & Informasi Jalan</span>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">📄 Dokumen</button>
+      <div class="dropdown-content">
+        <a href="dokumen/sk_ruas_2019.pdf" target="_blank">SK Ruas 2019</a>
+        <a href="dokumen/sk_ruas_2020.pdf" target="_blank">SK Ruas 2020</a>
+        <a href="dokumen/sk_ruas_2021.pdf" target="_blank">SK Ruas 2021</a>
+        <a href="dokumen/sk_ruas_2022.pdf" target="_blank">SK Ruas 2022</a>
+        <a href="dokumen/sk_ruas_2023.pdf" target="_blank">SK Ruas 2023</a>
+        <a href="dokumen/sk_ruas_2024.pdf" target="_blank">SK Ruas 2024</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="map-card">
+    <div class="map-title">Peta Interaktif Jalan </div>
+    <div id="map"></div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="card-grid">
+    <div class="card" onclick="toggleLayer(this, 'baik')"><i class="fas fa-check-circle"></i><div>Jalan Baik</div><span>1.234 Km</span></div>
+    <div class="card" onclick="toggleLayer(this, 'sedang')"><i class="fas fa-adjust"></i><div>Jalan Sedang</div><span>987 Km</span></div>
+    <div class="card" onclick="toggleLayer(this, 'rusak-ringan')"><i class="fas fa-exclamation-triangle"></i><div>Jalan Rusak Ringan</div><span>456 Km</span></div>
+    <div class="card" onclick="toggleLayer(this, 'rusak-berat')"><i class="fas fa-times-circle"></i><div>Jalan Rusak Berat</div><span>321 Km</span></div>
+    <div class="card" onclick="toggleLayer(this, 'non-mantap')"><i class="fas fa-minus-circle"></i><div>Jalan Non Mantap</div><span>789 Km</span></div>
+    <div class="card" onclick="toggleLayer(this, 'mantap')"><i class="fas fa-check-double"></i><div>Jalan Mantap</div><span>2.345 Km</span></div>
+    <div class="card" onclick="toggleLayer(this, 'nasional')"><i class="fas fa-globe"></i><div>Jalan Nasional</div><span>1.745,92 Km</span></div>
+    <div class="card" onclick="toggleLayer(this, 'provinsi')"><i class="fas fa-map-marker-alt"></i><div>Jalan Provinsi</div><span>2.014,23 Km</span></div>
+  </div>
+</div>
+
+<footer>Data Release 2024, Publish 2025 | © Copyright by @zuwlend</footer>
+
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  let map = L.map('map').setView([-4.0, 120.2], 6);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
+
+  const base = "https://raw.githubusercontent.com/junzuw/data_jalan_geojson/main/";
+  const layers = {};
+
+  function toggleLayer(cardEl, type) {
+    if (layers[type]) {
+      map.removeLayer(layers[type]);
+      delete layers[type];
+      cardEl.classList.remove('active');
+      return;
+    }
+
+    cardEl.classList.add('active');
+
+    if (type === 'baik') {
+      fetch(base + "jalan_provinsi.geojson")
+        .then(res => res.json())
+        .then(data => {
+          const layer = L.geoJSON(data, {
+            style: () => ({ color: 'green', weight: 4 }),
+            onEachFeature: (f, layer) => {
+              const nama = f.properties.nama || f.properties.Nama || "Tidak diketahui";
+              const panjang = f.properties.panjang_SK || f.properties.panjang || "-";
+              layer.bindPopup(`<b>${nama}</b><br/>Panjang: ${panjang} Km`);
+            }
+          }).addTo(map);
+          layers[type] = layer;
+        });
+
+    } else if (type === 'provinsi') {
+      fetch(base + "jalan_provinsi.geojson")
+        .then(res => res.json())
+        .then(data => {
+          const layer = L.geoJSON(data, {
+            style: () => ({ color: 'magenta', weight: 4 }),
+            onEachFeature: (f, layer) => {
+              const nama = f.properties.nama || f.properties.Nama || "Tidak diketahui";
+              layer.bindPopup(`<b>${nama}</b>`);
+            }
+          }).addTo(map);
+          layers[type] = layer;
+        });
+
+    } else if (type === 'nasional') {
+      fetch(base + "jalan_nasional_sulsel.geojson")
+        .then(res => res.json())
+        .then(data => {
+          const layer = L.geoJSON(data, {
+            style: () => ({ color: 'blue', weight: 4 }),
+            onEachFeature: (f, layer) => {
+              const nama = f.properties.nama || f.properties.Nama || "Tidak diketahui";
+              layer.bindPopup(`<b>${nama}</b>`);
+            }
+          }).addTo(map);
+          layers[type] = layer;
+        });
+
+    } else if (type === 'rusak-berat') {
+      fetch(base + "center_berat.geojson")
+        .then(res => res.json())
+        .then(data => {
+          const layer = L.geoJSON(data, {
+            pointToLayer: (f, latlng) => L.marker(latlng, {
+              icon: L.icon({
+                iconUrl: 'https://maps.google.com/mapfiles/ms/icons/red-dot.png',
+                iconSize: [32, 32]
+              })
+            }),
+            onEachFeature: (f, layer) => {
+              const nm = f.properties.Nm || "Tidak diketahui";
+              const kabkot = f.properties.Kab_Kot || "-";
+              const kec = f.properties.Kecamatan || "-";
+              const desa = f.properties.Desa_Kel || "-";
+              const panjang = f.properties.panjang_SK || "-";
+              layer.bindPopup(`
+                <div style="font-size:13px; line-height:1.5;">
+                  <b>🛣️ Ruas:</b> ${nm}<br/>
+                  <b>🏙️ Kabupaten/Kota:</b> ${kabkot}<br/>
+                  <b>📍 Kecamatan:</b> ${kec}<br/>
+                  <b>🏡 Desa/Kelurahan:</b> ${desa}<br/>
+                  <b>📏 Panjang:</b> ${panjang} Km
+                </div>
+              `);
+            }
+          }).addTo(map);
+          layers[type] = layer;
+        });
+
+    } else if (type === 'rusak-ringan') {
+      fetch(base + "center_ringan.geojson")
+        .then(res => res.json())
+        .then(data => {
+          const layer = L.geoJSON(data, {
+            pointToLayer: (f, latlng) => L.marker(latlng, {
+              icon: L.icon({
+                iconUrl: 'https://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
+                iconSize: [32, 32]
+              })
+            }),
+            onEachFeature: (f, layer) => {
+              const nm = f.properties.Nm || "Tidak diketahui";
+              const kabkot = f.properties.Kab_Kot || "-";
+              const kec = f.properties.Kecamatan || "-";
+              const desa = f.properties.Desa_Kel || "-";
+              const panjang = f.properties.panjang_SK || "-";
+              layer.bindPopup(`
+                <div style="font-size:13px; line-height:1.5;">
+                  <b>🛣️ Ruas:</b> ${nm}<br/>
+                  <b>🏙️ Kabupaten/Kota:</b> ${kabkot}<br/>
+                  <b>📍 Kecamatan:</b> ${kec}<br/>
+                  <b>🏡 Desa/Kelurahan:</b> ${desa}<br/>
+                  <b>📏 Panjang:</b> ${panjang} Km
+                </div>
+              `);
+            }
+          }).addTo(map);
+          layers[type] = layer;
+        });
+
+    } else if (type === 'sedang') {
+      fetch(base + "center_sedang.geojson")
+        .then(res => res.json())
+        .then(data => {
+          const layer = L.geoJSON(data, {
+            pointToLayer: (f, latlng) => L.marker(latlng, {
+              icon: L.icon({
+                iconUrl: 'https://maps.google.com/mapfiles/ms/icons/ltblue-dot.png',
+                iconSize: [32, 32]
+              })
+            }),
+            onEachFeature: (f, layer) => {
+              const nm = f.properties.Nm || "Tidak diketahui";
+              const kabkot = f.properties.Kab_Kot || "-";
+              const kec = f.properties.Kecamatan || "-";
+              const desa = f.properties.Desa_Kel || "-";
+              const panjang = f.properties.panjang_SK || "-";
+              layer.bindPopup(`
+                <div style="font-size:13px; line-height:1.5;">
+                  <b>🛣️ Ruas:</b> ${nm}<br/>
+                  <b>🏙️ Kabupaten/Kota:</b> ${kabkot}<br/>
+                  <b>📍 Kecamatan:</b> ${kec}<br/>
+                  <b>🏡 Desa/Kelurahan:</b> ${desa}<br/>
+                  <b>📏 Panjang:</b> ${panjang} Km
+                </div>
+              `);
+            }
+          }).addTo(map);
+          layers[type] = layer;
+        });
+
+    } else if (type === 'mantap') {
+      const popup = L.popup({ closeButton: false, autoClose: true })
+        .setLatLng([-4.2, 119.6])
+        .setContent('<div style="font-weight:bold; font-size:14px;">Jalan Mantap</div><div>2.345 Km</div>')
+        .openOn(map);
+      layers[type] = popup;
+
+    } else if (type === 'non-mantap') {
+      const popup = L.popup({ closeButton: false, autoClose: true })
+        .setLatLng([-4.5, 120.1])
+        .setContent('<div style="font-weight:bold; font-size:14px;">Jalan Non Mantap</div><div>789 Km</div>')
+        .openOn(map);
+      layers[type] = popup;
+    }
+  }
+</script>
+</body>
+</html>

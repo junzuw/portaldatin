@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Infrastruktur Permukiman</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      background: #f9f9f9;
+      color: #333;
+    }
+    header {
+      background-color: #0057b7;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      color: #0057b7;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    h2 {
+      color: #0057b7;
+      margin-bottom: 1rem;
+    }
+    .card-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .card {
+      flex: 1 1 calc(33.333% - 1rem);
+      background: white;
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease;
+      cursor: pointer;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card i {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: #0057b7;
+    }
+    .card-title {
+      font-weight: 600;
+    }
+    .map-section {
+      margin-top: 2rem;
+    }
+    .map-section iframe {
+      width: 100%;
+      height: 450px;
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .indikator-section {
+      margin-top: 3rem;
+    }
+    .indikator {
+      background: white;
+      border-radius: 12px;
+      padding: 1rem 1.5rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+    }
+    .indikator h3 {
+      color: #0057b7;
+      margin-bottom: 1rem;
+    }
+    .indikator img {
+      width: 100%;
+      max-width: 100%;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+    .indikator a {
+      color: #0057b7;
+      font-weight: 600;
+      text-decoration: underline;
+    }
+    @media (max-width: 768px) {
+      .card {
+        flex: 1 1 calc(50% - 1rem);
+      }
+    }
+    @media (max-width: 480px) {
+      .card {
+        flex: 1 1 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Infrastruktur Permukiman</h1>
+  </header>
+
+  <div class="container">
+    <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Kembali ke Beranda</a>
+
+    <h2>Kategori Infrastruktur</h2>
+    <div class="card-grid">
+      <div class="card" onclick="updateMap('airlimbah')">
+        <i class="fas fa-recycle"></i>
+        <div class="card-title">Air Limbah</div>
+      </div>
+      <div class="card" onclick="updateMap('sampah')">
+        <i class="fas fa-trash-alt"></i>
+        <div class="card-title">Persampahan</div>
+      </div>
+      <div class="card" onclick="updateMap('airminum')">
+        <i class="fas fa-tint"></i>
+        <div class="card-title">Air Minum</div>
+      </div>
+      <div class="card" onclick="updateMap('drainase')">
+        <i class="fas fa-water"></i>
+        <div class="card-title">Drainase</div>
+      </div>
+      <div class="card" onclick="updateMap('permukiman')">
+        <i class="fas fa-home"></i>
+        <div class="card-title">Kawasan Permukiman</div>
+      </div>
+      <div class="card" onclick="updateMap('gedung')">
+        <i class="fas fa-building"></i>
+        <div class="card-title">Bangunan Gedung</div>
+      </div>
+    </div>
+
+    <div class="map-section">
+      <h2>Peta Interaktif Infrastruktur Permukiman</h2>
+      <iframe id="mapFrame" src="https://yourdomain.github.io/peta-default"></iframe>
+    </div>
+
+    <div class="indikator-section">
+      <div class="indikator"><h3>BABs Terbuka Tahun 2024</h3><p>Presentase rumah tangga yang masih BAB sembarangan: <strong>12,4%</strong></p></div>
+      <div class="indikator"><h3>Penanganan Sampah Perkotaan 2024</h3><p>Persentase kota/kabupaten dengan sistem pengelolaan sampah: <strong>85%</strong></p></div>
+      <div class="indikator"><h3>Air Minum Layak dan Sumber Air Minum 2024</h3><img src="gambar-airminum1.png" alt="Tabel Air Minum 1"><img src="gambar-airminum2.png" alt="Tabel Air Minum 2"></div>
+      <div class="indikator"><h3>Sumber Air Minum Rumah Tangga 2024</h3><img src="gambar-sumberair1.png" alt="Tabel Sumber Air 1"><img src="gambar-sumberair2.png" alt="Tabel Sumber Air 2"></div>
+      <div class="indikator"><h3>Akses Tidak Layak & Tidak Ada Akses Air Minum 2024</h3><img src="gambar-aksesair1.png" alt="Tabel Akses Tidak Layak"><img src="gambar-aksesair2.png" alt="Tabel Tidak Ada Akses"></div>
+      <div class="indikator"><h3>Sanitasi Layak & Rumah Tangga Tanpa Fasilitas BAB 2024</h3><img src="gambar-sanitasi1.png" alt="Tabel Sanitasi Layak"><img src="gambar-sanitasi2.png" alt="Tabel Tanpa Fasilitas BAB"></div>
+      <div class="indikator"><h3>Penerima Manfaat Jaringan Perpipaan 2024</h3><img src="gambar-perpipaan.png" alt="Tabel Jaringan Perpipaan"></div>
+      <div class="indikator"><h3>Rumah Layak Huni 2024</h3><img src="gambar-layakhuni1.png" alt="Tabel Rumah Layak Huni 1"><img src="gambar-layakhuni2.png" alt="Tabel Rumah Layak Huni 2"></div>
+      <div class="indikator"><h3>SK. Kawasan Kumuh Kewenangan Provinsi</h3><p><a href="file/SK-Kawasan-Kumuh.pdf" target="_blank">Unduh SK Kawasan Kumuh (PDF)</a></p></div>
+    </div>
+  </div>
+
+  <script>
+    const mapLinks = {
+      airlimbah: "https://yourdomain.github.io/peta-airlimbah",
+      sampah: "https://yourdomain.github.io/peta-persampahan",
+      airminum: "https://yourdomain.github.io/peta-airminum",
+      drainase: "https://yourdomain.github.io/peta-drainase",
+      permukiman: "https://yourdomain.github.io/peta-kawasan-permukiman",
+      gedung: "https://yourdomain.github.io/peta-gedung"
+    };
+
+    function updateMap(key) {
+      const mapFrame = document.getElementById("mapFrame");
+      mapFrame.src = mapLinks[key] || "https://yourdomain.github.io/peta-default";
+    }
+  </script>
+</body>
+</html>

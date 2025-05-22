@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Capaian Indikator Kinerja 2024</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+    }
+    header {
+      background-color: #0d47a1;
+      color: white;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 18px;
+      font-weight: bold;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo {
+      height: 32px;
+    }
+    .home-btn {
+      background-color: transparent;
+      border: 1px solid #faee83e5;
+      color: #ffc400;
+      padding: 6px 12px;
+      font-size: 14px;
+      border-radius: 20px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .home-btn:hover {
+      background-color: #f7f58be8;
+      color: rgb(34, 33, 33);
+    }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 15px;
+      padding: 24px;
+      box-sizing: border-box;
+    }
+    .card {
+      background-color: white;
+      border-radius: 20px;
+      padding: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      font-size: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: transform 0.2s;
+      height: 160px;
+      text-align: center;
+    }
+    .card:hover {
+      transform: scale(1.03);
+    }
+    .card i {
+      font-size: 24px;
+      color: #0d47a1;
+    }
+    .card-title {
+      font-weight: bold;
+      color: #333;
+    }
+    .card-desc {
+      font-weight: normal;
+      font-size: 13px;
+      color: #666;
+      width: 100%;
+      text-align: center;
+    }
+    footer {
+      background-color: #0d47a1;
+      color: white;
+      text-align: center;
+      padding: 12px;
+      font-size: 13px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <img src="images/logo_sulsel.png" alt="Logo Sulsel" class="logo">
+    <span>Capaian Indikator Kinerja 2024</span>
+  </div>
+  <button class="home-btn" onclick="window.location.href='index.html'">
+    <i class="fas fa-home"></i> Home
+  </button>
+</header>
+
+<div class="card-grid">
+  <div class="card">
+    <i class="fas fa-leaf"></i>
+    <div class="card-title">Penurunan Emisi GRK</div>
+    <div class="card-desc">1,13 Juta Ton CO₂ Eq</div>
+  </div>
+  <div class="card">
+    <i class="fas fa-recycle"></i>
+    <div class="card-title">Indeks KLH</div>
+    <div class="card-desc">73,23%</div>
+  </div>
+  <div class="card">
+    <i class="fas fa-tools"></i>
+    <div class="card-title">Indeks Layanan Infrastruktur</div>
+    <div class="card-desc">79,44%</div>
+  </div>
+  <div class="card">
+    <i class="fas fa-balance-scale"></i>
+    <div class="card-title">Indeks Williamson</div>
+    <div class="card-desc">0,568</div>
+  </div>
+  <div class="card">
+    <i class="fas fa-hand-holding-heart"></i>
+    <div class="card-title">Tingkat Kemiskinan</div>
+    <div class="card-desc">8,53%</div>
+  </div>
+  <div class="card">
+    <i class="fas fa-user-clock"></i>
+    <div class="card-title">Pengangguran Terbuka</div>
+    <div class="card-desc">5,72%</div>
+  </div>
+  <div class="card">
+    <i class="fas fa-chart-bar"></i>
+    <div class="card-title">Indeks Pembangunan Manusia</div>
+    <div class="card-desc">72,24</div>
+  </div>
+  <div class="card">
+    <i class="fas fa-chart-line"></i>
+    <div class="card-title">Pertumbuhan Ekonomi</div>
+    <div class="card-desc">4,65%</div>
+  </div>
+  <div class="card">
+    <i class="fas fa-percentage"></i>
+    <div class="card-title">Laju Inflasi</div>
+    <div class="card-desc">2,40%</div>
+  </div>
+  <div class="card">
+    <i class="fas fa-money-bill-wave"></i>
+    <div class="card-title">PDRB per Kapita</div>
+    <div class="card-desc">ADHB: 59,66 Juta<br/>ADHK: 33,23 Juta</div>
+  </div>
+  <div class="card">
+    <i class="fas fa-equals"></i>
+    <div class="card-title">Gini Ratio</div>
+    <div class="card-desc">0,377</div>
+  </div>
+</div>
+
+<footer>Data Release Tahun 2024, Produksi Tahun 2025</footer>
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profil Provinsi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      background: #f9f9f9;
+      color: #333;
+    }
+    header {
+      background-color: #0057b7;
+      color: white;
+      padding: 1rem 2rem;
+      text-align: center;
+    }
+    .container {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1.5rem;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    h2 {
+      color: #0057b7;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    ul {
+      padding-left: 1.2rem;
+    }
+    ul li {
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    ul li i {
+      font-size: 1.2rem;
+      width: 24px;
+    }
+    a.back-link {
+      display: inline-block;
+      margin-top: 2rem;
+      text-decoration: none;
+      color: #0057b7;
+      font-weight: 600;
+    }
+    .map-image {
+      display: block;
+      max-width: 100%;
+      margin: 0 auto 1.5rem auto;
+      border-radius: 12px;
+    }
+    @media (max-width: 600px) {
+      .container {
+        margin: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Profil Provinsi Sulawesi Selatan</h1>
+  </header>
+<div style="padding: 1rem;">
+  <a href="index.html" style="text-decoration: none; color: #0057b7; font-weight: bold;">
+    <i class="fas fa-arrow-left"></i> Kembali ke Beranda
+  <div class="container">
+    <img src="images/peta-provinsi.png" alt="Peta Provinsi" class="map-image">
+
+    <h2><i class="fas fa-map-marked-alt" style="color:#0057b7;"></i> Wilayah & Statistik</h2>
+    <ul>
+      <li><i class="fas fa-ruler-combined" style="color:darkorange;"></i> Luas Wilayah: 123.456 km²</li>
+      <li><i class="fas fa-building" style="color:seagreen;"></i> Wilayah Administrasi Pemerintahan: 10 Kabupaten, 3 Kota</li>
+      <li><i class="fas fa-compass" style="color:tomato;"></i> Batas Wilayah: Utara - Laut A, Selatan - Provinsi B, Timur - Laut C, Barat - Provinsi D</li>
+      <li><i class="fas fa-water" style="color:royalblue;"></i> Jumlah Pulau: 1.234 Pulau</li>
+      <li><i class="fas fa-wave-square" style="color:slateblue;"></i> Panjang Garis Pantai: 5.678 km</li>
+      <li><i class="fas fa-users" style="color:teal;"></i> Jumlah Penduduk: 8.765.432 Jiwa</li>
+      <li><i class="fas fa-chart-line" style="color:crimson;"></i> Laju Pertumbuhan Penduduk: 1,2% per tahun</li>
+      <li><i class="fas fa-chart-bar" style="color:darkcyan;"></i> Kepadatan Penduduk: 120 jiwa/km²</li>
+    </ul>
+
+    <a href="index.html" class="back-link">&larr; Kembali ke Beranda</a>
+  </div>
+</body>
+</html>

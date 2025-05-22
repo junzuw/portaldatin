@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Irigasi Provinsi Sulsel</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background-color: #f9f9f9; display: flex; flex-direction: column; min-height: 100vh; }
+    .sticky-wrapper { position: sticky; top: 0; z-index: 1000; }
+    header {
+      background-color: #0d47a1;
+      color: white;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo { height: 32px; }
+    .pdf-link {
+      background-color: white;
+      color: #0d47a1;
+      font-size: 13px;
+      padding: 6px 12px;
+      border-radius: 15px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.2s;
+    }
+    .pdf-link:hover { background-color: #c5e1f9; }
+    .map-card {
+      background-color: white;
+      border-radius: 0 0 20px 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      padding: 10px;
+    }
+    .map-title { font-size: 16px; font-weight: bold; margin-bottom: 10px; color: #333; }
+    #map { height: 300px; border-radius: 12px; }
+    .container { padding: 10px; flex-grow: 1; }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+    .card {
+      background-color: white;
+      border-radius: 20px;
+      padding: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      text-align: center;
+      font-size: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    .card:hover { background-color: #e3f2fd; }
+    .card.active { background-color: #c5e1f9; }
+    .card i { font-size: 24px; color: #0d47a1; }
+    .card span { font-size: 12px; color: #666; }
+    footer {
+      background-color: #0d47a1;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="sticky-wrapper">
+  <header>
+    <div class="header-left">
+      <img src="images/logo_sulsel.png" alt="Logo Sulsel" class="logo">
+      <span>Data & Informasi Daerah Irigasi (D.I)</span>
+      <i class="fas fa-water"></i>
+    </div>
+    <a href="https://drive.google.com/drive/folders/YOUR_FOLDER_ID" target="_blank" class="pdf-link">📄 Dokumen</a>
+  </header>
+
+  <div class="map-card">
+    <div class="map-title">Peta Interaktif Irigasi</div>
+    <div id="map"></div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="card-grid">
+    <div class="card" onclick="toggleLayer(this, 'total')"><i class="fas fa-layer-group"></i><div>Total D.I.</div><span>125 lokasi<br/>32.500 Ha</span></div>
+    <div class="card" onclick="toggleLayer(this, 'pusat')"><i class="fas fa-landmark"></i><div>D.I. Pusat</div><span>70 lokasi<br/>18.400 Ha</span></div>
+    <div class="card" onclick="toggleLayer(this, 'provinsi')"><i class="fas fa-map-marker-alt"></i><div>D.I. Provinsi</div><span>55 lokasi<br/>14.100 Ha</span></div>
+    <div class="card" onclick="toggleLayer(this, 'bendungan')"><i class="fas fa-building"></i><div>Jumlah Bendungan</div><span>30 unit<br/>14.100 Ha</span></div>
+</div>
+
+  </div>
+</div>
+
+<footer>Data Release 2024, Publish 2025 | © Copyright by @zuwlend</footer>
+
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  let map = L.map('map').setView([-4.0, 120.2], 6);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
+
+  const layers = {};
+
+  function toggleLayer(cardEl, type) {
+    if (layers[type]) {
+      map.removeLayer(layers[type]);
+      delete layers[type];
+      cardEl.classList.remove('active');
+      return;
+    }
+
+    cardEl.classList.add('active');
+
+    let content = 'rasionsl efisiensi</br><br>anggaran</>';
+    let latlng = [-4.0, 120.2];
+
+    if (type === 'jumlah') {
+  content = '<b>Jumlah Bendungan</b><br/>38 unit';
+}
+
+    if (type === 'total') {
+      content = '<b>Total D.I</b><br/>125 Lokasi <br>32.500 Ha';
+    } else if (type === 'pusat') {
+      content = '<b>D.I. Pusat</b><br/>70 Lokasi<br>18.400 Ha<b>';
+      latlng = [-4.2, 120.3];
+    } else if (type === 'provinsi') {
+      content = '<b>D.I. Provinsi</b><br/>55 Lokasi<br>14.100 Ha</br>';
+      latlng = [-4.4, 120.5];
+    } else if (type === 'bendungan') {
+      content = '<b>Jumlah Bendungan</b><br/>30 unit<br>14.000 Ha</br>';
+      latlng = [-4.1, 120.3];
+    }
+
+    const popup = L.popup({ closeButton: false, autoClose: true })
+      .setLatLng(latlng)
+      .setContent(content)
+      .openOn(map);
+
+    layers[type] = popup;
+  }
+</script>
+</body>
+</html>

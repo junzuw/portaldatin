@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jembatan Provinsi Sulsel</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background-color: #f9f9f9; }
+    .sticky-wrapper { position: sticky; top: 0; z-index: 1000; }
+    header {
+      background-color: #0d47a1;
+      color: white;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo {
+      height: 32px;
+    }
+    .pdf-link {
+      background-color: white;
+      color: #0d47a1;
+      font-size: 13px;
+      padding: 6px 12px;
+      border-radius: 15px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.2s;
+    }
+    .pdf-link:hover {
+      background-color: #c5e1f9;
+    }
+    .map-card {
+      background-color: white;
+      border-radius: 0 0 20px 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      padding: 10px;
+    }
+    .map-title {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #333;
+    }
+    #map {
+      height: 300px;
+      border-radius: 12px;
+    }
+    .container {
+      padding: 10px;
+    }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+    .card {
+      background-color: white;
+      border-radius: 20px;
+      padding: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      text-align: center;
+      font-size: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    .card:hover {
+      background-color: #e3f2fd;
+    }
+    .card.active {
+      background-color: #c5e1f9;
+    }
+    .card i {
+      font-size: 24px;
+      color: #0d47a1;
+    }
+    .card span {
+      font-size: 12px;
+      color: #666;
+    }
+        footer {
+      background-color: #0d47a1;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="sticky-wrapper">
+  <header>
+    <div class="header-left">
+      <img src="logo_sulsel.png" alt="Logo Sulsel" class="logo">
+      <span>Data & Informasi Jembatan</span>
+      <i class="fas fa-bridge"></i>
+    </div>
+    <a href="https://drive.google.com/drive/folders/YOUR_FOLDER_ID" target="_blank" class="pdf-link">📄 Dokumen</a>
+  </header>
+
+  <div class="map-card">
+    <div class="map-title">Peta Interaktif Jembatan</div>
+    <div id="map"></div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="card-grid">
+    <div class="card" onclick="toggleLayer(this, 'total')"><i class="fas fa-layer-group"></i><div>Total Jembatan</div><span>123 unit</span></div>
+    <div class="card" onclick="toggleLayer(this, 'panjang')"><i class="fas fa-ruler-horizontal"></i><div>Total Panjang Jembatan</div><span>12.350 m</span></div>
+    <div class="card" onclick="toggleLayer(this, 'rusak-ringan')"><i class="fas fa-tools"></i><div>Rusak Ringan</div><span>15 unit</span></div>
+    <div class="card" onclick="toggleLayer(this, 'rusak-berat')"><i class="fas fa-exclamation-triangle"></i><div>Rusak Berat</div><span>5 unit</span></div>
+    <div class="card" onclick="toggleLayer(this, 'pusat')"><i class="fas fa-landmark"></i><div>Pusat</div><span>2 unit</span></div>
+    <div class="card" onclick="toggleLayer(this, 'provinsi')"><i class="fas fa-map-marker-alt"></i><div>Provinsi</div><span>101 unit</span></div>
+  </div>
+</div>
+
+<footer>Bidang Infrastruktur & Kewilayahan BAPPELITBANGDA Provinsi Sulawesi Selatan | 2025 © Copyright by@zuwlend</footer>
+
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  let map = L.map('map').setView([-4.0, 120.2], 6);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
+
+  const base = "https://raw.githubusercontent.com/junzuw/data_jembatan_geojson/main/";
+  const layers = {};
+
+  function toggleLayer(cardEl, type) {
+    if (layers[type]) {
+      map.removeLayer(layers[type]);
+      delete layers[type];
+      cardEl.classList.remove('active');
+      return;
+    }
+
+    cardEl.classList.add('active');
+if (type === 'total') {
+  const popup = L.popup({ closeButton: false, autoClose: true })
+    .setLatLng([-4.0, 120.2])
+    .setContent('<b>Total Jembatan</b><br/>123 unit')
+    .openOn(map);
+  layers[type] = popup;
+
+} else if (type === 'panjang') {
+  const popup = L.popup({ closeButton: false, autoClose: true })
+    .setLatLng([-4.1, 120.3])
+    .setContent('<b>Total Panjang Jembatan</b><br/>12.350 m')
+    .openOn(map);
+  layers[type] = popup;
+
+} else if (type === 'rusak-ringan') {
+  const popup = L.popup({ closeButton: false, autoClose: true })
+    .setLatLng([-4.2, 120.4])
+    .setContent('<b>Jembatan Rusak Ringan</b><br/>15 unit')
+    .openOn(map);
+  layers[type] = popup;
+
+} else if (type === 'rusak-berat') {
+  const popup = L.popup({ closeButton: false, autoClose: true })
+    .setLatLng([-4.3, 120.1])
+    .setContent('<b>Jembatan Rusak Berat</b><br/>5 unit')
+    .openOn(map);
+  layers[type] = popup;
+
+} else if (type === 'pusat') {
+  const popup = L.popup({ closeButton: false, autoClose: true })
+    .setLatLng([-4.4, 120.5])
+    .setContent('<b>Jembatan Pusat</b><br/>2 unit')
+    .openOn(map);
+  layers[type] = popup;
+
+} else if (type === 'provinsi') {
+  const popup = L.popup({ closeButton: false, autoClose: true })
+    .setLatLng([-4.5, 120.7])
+    .setContent('<b>Jembatan Provinsi</b><br/>101 unit')
+    .openOn(map);
+  layers[type] = popup;
+}
+
+    // fetch(base + type + ".geojson")
+    //  .then(res => res.json())
+    //  .then(data => {
+    //    const layer = L.geoJSON(data, {
+    //      pointToLayer: (f, latlng) => L.marker(latlng),
+    //      onEachFeature: (f, layer) => {
+    //        const nama = f.properties.nama || "Jembatan";
+    //        const kab = f.properties.kabupaten || "-";
+    //       const kec = f.properties.kecamatan || "-";
+    //        const panjang = f.properties.panjang || "-";
+    //        const tahun = f.properties.tahun || "-";
+    //        layer.bindPopup(`
+    //          <div style="font-size:13px; line-height:1.5;">
+    //            <b>🌉 Nama:</b> ${nama}<br/>
+    //            <b>🏙️ Kab/Kota:</b> ${kab}<br/>
+    //            <b>📍 Kecamatan:</b> ${kec}<br/>
+    //            <b>📏 Panjang:</b> ${panjang} m<br/>
+    //            <b>📆 Tahun:</b> ${tahun}
+    //          </div>
+    //       `);
+    //      }
+    //    }).addTo(map);
+    //    layers[type] = layer;
+    //  });
+
+ }
+</script>
+</body>
+</html>

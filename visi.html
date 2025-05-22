@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visi & Misi Provinsi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/feather-icons"></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      background: #f9f9f9;
+      color: #333;
+    }
+    header {
+      background-color: #0057b7;
+      color: white;
+      padding: 1rem 2rem;
+      text-align: center;
+    }
+    .container {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1.5rem;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    h2 {
+      color: #0057b7;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    p {
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+    ul {
+      padding-left: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    ul li {
+      margin-bottom: 0.5rem;
+    }
+    a.back-link {
+      display: inline-block;
+      margin-top: 2rem;
+      text-decoration: none;
+      color: #0057b7;
+      font-weight: 600;
+    }
+    .icon {
+      width: 24px;
+      height: 24px;
+      color: #0057b7;
+    }
+    @media (max-width: 600px) {
+      .container {
+        margin: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Visi & Misi Provinsi</h1>
+  </header>
+  <div class="container">
+    <h2><i data-feather="target" class="icon"></i>Visi</h2>
+    <p>
+      "Menjadi Provinsi yang Maju, Mandiri, dan Berkelanjutan untuk Kesejahteraan Masyarakat."
+    </p>
+
+    <h2><i data-feather="flag" class="icon"></i>Misi</h2>
+    <ul>
+      <li>Meningkatkan kualitas sumber daya manusia yang unggul dan berdaya saing.</li>
+      <li>Mendorong pertumbuhan ekonomi yang inklusif dan berkelanjutan.</li>
+      <li>Mengembangkan infrastruktur dan konektivitas antar wilayah.</li>
+      <li>Menjaga kelestarian lingkungan hidup dan tata ruang berwawasan mitigasi bencana.</li>
+      <li>Meningkatkan tata kelola pemerintahan yang baik dan pelayanan publik yang prima.</li>
+    </ul>
+
+    <a href="index.html" class="back-link">&larr; Kembali ke Beranda</a>
+  </div>
+
+  <script>
+    feather.replace();
+  </script>
+</body>
+</html>

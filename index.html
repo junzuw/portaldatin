@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portal Data Infrastruktur & Kewilayahan</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+
+    header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: #0d47a1;
+  color: white;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+body {
+  margin: 0;
+  background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
+  padding: 0;
+  overflow-x: hidden;
+}
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f9f9f9;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background-color: #0d47a1;
+      color: white;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    header img {
+      height: 35px;
+    }
+    .section {
+      padding: 20px 10px;
+    }
+    .section h2 {
+      margin-bottom: 15px;
+      color: #0d47a1;
+      font-size: 18px;
+      text-align: center;
+    }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 15px;
+      padding: 0 12px; /* tambahkan padding kiri kanan */
+         box-sizing: border-box;
+    }
+    .card {
+      background-color: white;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      text-align: center;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .card:hover {
+      background-color: #e3f2fd;
+    }
+    .card i {
+      font-size: 24px;
+      color: #0d47a1;
+    }
+    footer {
+      background-color: #0d47a1;
+      color: white;
+      text-align: center;
+      padding: 12px;
+      font-size: 13px;
+      margin-top: auto;
+    }
+    .atasan-box {
+  text-align: center;
+  margin: 20px auto 10px;
+}
+.atasan-box img {
+  height: 120px;
+  border-radius: 13px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  border-radius: 50%;
+  border: 3px solid white;
+}
+.caption {
+  font-size: 13px;
+  margin-top: 6px;
+  color: #444;
+  line-height: 1.4;
+}
+  .caption-2 {
+  font-size: 9px;
+  margin-top: 6px;
+  color: #444;
+  line-height: 1.4;
+}
+.section-divider {
+  border: none;
+  height: 1px;
+  background: #ccc;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  margin: 30px auto;
+  width: 90%;
+}
+.section {
+  padding: 20px 10px;
+  position: relative;
+  text-align: center;
+}
+.section-icon i {
+  font-size: 28px;
+  color: #0d47a1;
+  margin-bottom: 6px;
+}
+.section h2 {
+  display: inline-block;
+  position: relative;
+  padding: 0 12px;
+  background-color: #f9f9f9;
+  color: #0d47a1;
+  font-size: 18px;
+  z-index: 1;
+}
+
+.section h2::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -100vw;
+  right: -100vw;
+  height: 2px;
+  background-color: #0d47a1;
+  z-index: -1;
+}
+.section-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 30px 0 15px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #0d47a1;
+  gap: 10px;
+}
+
+.section-title::before,
+.section-title::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-color: #0d47a1;
+  opacity: 0.5;
+}
+.card {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.card:hover {
+  transform: scale(1.2);
+}
+
+  </style>
+</head>
+<body>
+
+<header>
+  <img src="images/logo_sulsel.png" alt="Logo Sulsel" />
+  Portal Datin Bidang Infraswil
+</header>
+
+<!-- Tambahkan ini di dalam <body>, tepat setelah </header> -->
+<div class="atasan-box">
+  <img src="images/atasan_saya.png" alt="Foto Atasan" class="gambar-bulat" />
+
+  <div class="caption">
+    <strong>Ishak Amin Rusli, ST, M.Si</strong><br/>
+ <div class="caption-2"></div>
+    Kepala Bidang Infrastruktur & Kewilayahan<br>
+    Badan Perecanaan Pembangunan, Penelitian & Pengembangan Daerah<br>
+    (BAPPELITBANGDA) Provinsi Sulawesi Selatan 
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-head">
+        <div class="section-title">Gambaran Umum</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card" onclick="window.location.href='visi.html'">
+      <i class="fas fa-bullseye"></i>Visi & Misi
+    </div>
+    <div class="card" onclick="window.location.href='profil.html'">
+      <i class="fas fa-map"></i>Profil Provinsi
+    </div>
+    <div class="card" onclick="window.location.href='indikator.html'">
+      <i class="fas fa-chart-line"></i>Indikator Kinerja 2024
+    </div>
+    <div class="card" onclick="window.location.href='arah.html'">
+      <i class="fas fa-compass-drafting"></i>Arah Pengembangan Wilayah
+    </div>
+    <div class="card" onclick="window.location.href='upt.html'">
+      <i class="fas fa-building"></i>UPT Dinas
+    </div>
+    <div class="card" onclick="window.location.href='tim.html'">
+      <i class="fas fa-users"></i>Tim Penyusun
+    </div>
+  </div>
+</div>
+
+   
+<div class="section-title"></i>Infrastruktur & Kewilayahan</span>
+</div>
+
+  <div class="card-grid">
+    <div class="card"onclick="window.location.href='jalan.html'">
+  <i class="fas fa-road">
+      </i>Jalan & Jembatan</div>
+
+    <div class="card" onclick="window.location.href='irigasi.html'">
+      <i class="fas fa-water">
+         </i>Sumberdaya Air</div>
+      
+    <div class="card" onclick="window.location.href='perumahan.html'">
+    <i class="fas fa-house-chimney">
+        </i>Infrastruktur Perumahan</div>
+        
+    <div class="card" onclick="window.location.href='perhubungan.html'">
+    <i class="fas fa-bus"></i>Perhubungan & Transportasi</div>
+
+    <div class="card" onclick="window.location.href='kominfo.html'">
+    <i class="fas fa-wifi"></i>Komunikasi & Informatika/SP</div>
+
+    <div class="card" onclick="window.location.href='bappelitbangda.html'">
+    <i class="fas fa-brain"></i>BAPPELITBANGDA</div>
+
+    <div class="card" onclick="window.location.href='bpbd.html'">
+    <i class="fas fa-house-crack"></i>BPBD</div>
+
+    <div class="card"onclick="window.location.href='dispora.html'">
+      <i class="fas fa-person-running"></i>DISPORA</div>
+  </div>
+</div>
+
+<footer>Data Release 2024, Publish 2025 | © Copyright by @zuwlend</footer>
+
+</body>
+</html>

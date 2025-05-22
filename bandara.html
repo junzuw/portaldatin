@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bandara Provinsi Sulsel</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background-color: #f9f9f9; display: flex; flex-direction: column; min-height: 100vh; }
+    .sticky-wrapper { position: sticky; top: 0; z-index: 1000; }
+    header {
+      background-color: #0d47a1;
+      color: white;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo { height: 32px; }
+    .pdf-link {
+      background-color: white;
+      color: #0d47a1;
+      font-size: 13px;
+      padding: 6px 12px;
+      border-radius: 15px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.2s;
+    }
+    .pdf-link:hover { background-color: #c5e1f9; }
+    .map-card {
+      background-color: white;
+      border-radius: 0 0 20px 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      padding: 10px;
+    }
+    .map-title { font-size: 16px; font-weight: bold; margin-bottom: 10px; color: #333; }
+    #map { height: 300px; border-radius: 12px; }
+    .container { padding: 10px; flex-grow: 1; }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+    .card {
+      background-color: white;
+      border-radius: 20px;
+      padding: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      text-align: center;
+      font-size: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    .card:hover { background-color: #e3f2fd; }
+    .card.active { background-color: #c5e1f9; }
+    .card i { font-size: 24px; color: #0d47a1; }
+    .card span { font-size: 12px; color: #666; }
+    footer {
+      background-color: #0d47a1;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="sticky-wrapper">
+  <header>
+    <div class="header-left">
+      <img src="logo_sulsel.png" alt="Logo Sulsel" class="logo">
+      <span>Data & Informasi Bandara</span>
+      <i class="fas fa-plane-departure"></i>
+    </div>
+    <a href="https://drive.google.com/drive/folders/YOUR_FOLDER_ID" target="_blank" class="pdf-link">📄 Dokumen</a>
+  </header>
+
+  <div class="map-card">
+    <div class="map-title">Peta Interaktif Bandara</div>
+    <div id="map"></div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="card-grid">
+    <div class="card" onclick="toggleLayer(this, 'internasional')"><i class="fas fa-plane"></i><div>Bandara Internasional</div><span>3 unit</span></div>
+    <div class="card" onclick="toggleLayer(this, 'domestik')"><i class="fas fa-plane-arrival"></i><div>Bandara Domestik</div><span>10 unit</span></div>
+    <div class="card" onclick="toggleLayer(this, 'perintis')"><i class="fas fa-paper-plane"></i><div>Bandara Perintis</div><span>25 unit</span></div>
+    <div class="card" onclick="toggleLayer(this, 'total')">
+  <i class="fas fa-layer-group"></i>
+  <div>Total Bandara</div>
+  <span>38 unit</span>
+</div>
+
+  </div>
+</div>
+
+<footer>Bidang Infrastruktur & Kewilayahan BAPPELITBANGDA Provinsi Sulawesi Selatan | 2025 © Copyright by@zuwlend</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  let map = L.map('map').setView([-4.0, 120.2], 6);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
+
+  const layers = {};
+
+  function toggleLayer(cardEl, type) {
+    if (layers[type]) {
+      map.removeLayer(layers[type]);
+      delete layers[type];
+      cardEl.classList.remove('active');
+      return;
+    }
+
+    cardEl.classList.add('active');
+
+    let content = '';
+    let latlng = [-4.0, 120.2];
+
+    if (type === 'total') {
+  content = '<b>Total Bandara</b><br/>38 unit';
+}
+
+    if (type === 'internasional') {
+      content = '<b>Bandara Internasional</b><br/>3 unit';
+    } else if (type === 'domestik') {
+      content = '<b>Bandara Domestik</b><br/>10 unit';
+      latlng = [-4.2, 120.3];
+    } else if (type === 'perintis') {
+      content = '<b>Bandara Perintis</b><br/>25 unit';
+      latlng = [-4.4, 120.5];
+    }
+
+    const popup = L.popup({ closeButton: false, autoClose: true })
+      .setLatLng(latlng)
+      .setContent(content)
+      .openOn(map);
+
+    layers[type] = popup;
+  }
+</script>
+</body>
+</html>

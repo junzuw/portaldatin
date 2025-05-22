@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perhubungan & Transportasi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      background: #f9f9f9;
+      color: #333;
+    }
+    header {
+      background-color: #0057b7;
+      color: white;
+      padding: 1rem 2rem;
+      text-align: center;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 1.5rem;
+    }
+    h2 {
+      color: #0057b7;
+      margin-bottom: 1rem;
+    }
+    .card-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+    .card {
+      flex: 1 1 calc(20% - 1rem);
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      padding: 1rem;
+      text-align: center;
+      transition: transform 0.2s ease;
+      cursor: pointer;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card i {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: #0057b7;
+    }
+    .card-title {
+      font-weight: 600;
+    }
+    .map-section {
+      margin: 3rem 0;
+    }
+    iframe {
+      width: 100%;
+      height: 450px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    }
+    @media (max-width: 768px) {
+      .card {
+        flex: 1 1 calc(50% - 1rem);
+      }
+    }
+    @media (max-width: 480px) {
+      .card {
+        flex: 1 1 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Perhubungan & Transportasi</h1>
+  </header>
+<p style="text-align:center; margin-top: 1rem;">
+  <a href="index.html" style="color: #0057b7; font-weight: bold;">← Kembali ke Beranda</a>
+</p>
+  <div class="container">
+    <div class="card-grid">
+      <div class="card" onclick="loadMap('terminal')">
+        <i class="fas fa-bus-alt"></i>
+        <div class="card-title">Terminal</div>
+      </div>
+      <div class="card" onclick="loadMap('pelabuhan')">
+        <i class="fas fa-anchor"></i>
+        <div class="card-title">Pelabuhan</div>
+      </div>
+      <div class="card" onclick="loadMap('stasiun')">
+        <i class="fas fa-train"></i>
+        <div class="card-title">Stasiun</div>
+      </div>
+      <div class="card" onclick="loadMap('bandara')">
+        <i class="fas fa-plane"></i>
+        <div class="card-title">Bandara</div>
+      </div>
+      <div class="card" onclick="loadMap('transportasi')">
+        <i class="fas fa-shuttle-van"></i>
+        <div class="card-title">Transportasi Lokal</div>
+      </div>
+    </div>
+
+    <div class="map-section">
+      <h2>Peta Interaktif Transportasi</h2>
+      <iframe id="transport-map" src="https://yourdomain.github.io/peta-default"></iframe>
+    </div>
+  </div>
+
+  <script>
+    function loadMap(category) {
+      const mapLinks = {
+        terminal: "https://yourdomain.github.io/peta-terminal",
+        pelabuhan: "https://yourdomain.github.io/peta-pelabuhan",
+        stasiun: "https://yourdomain.github.io/peta-stasiun",
+        bandara: "https://yourdomain.github.io/peta-bandara",
+        transportasi: "https://yourdomain.github.io/peta-transportasi"
+      };
+      const iframe = document.getElementById("transport-map");
+      iframe.src = mapLinks[category] || "https://yourdomain.github.io/peta-default";
+    }
+  </script>
+<p style="text-align:center; margin-top: 1rem;">
+  <a href="index.html" style="color: #0057b7; font-weight: bold;">← Kembali ke Beranda</a>
+</p>
+</body>
+</html>
